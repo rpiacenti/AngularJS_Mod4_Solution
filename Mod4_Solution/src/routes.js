@@ -1,7 +1,7 @@
 (function () {
 'use strict';
 
-angular.module('dataModule')
+angular.module('MenuApp')
 .config(RoutesConfig);
 
 RoutesConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
@@ -17,30 +17,30 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
   .state('home', {
     url: '/',
     templateUrl: 'src/restaurantmenu/templates/home.template.html'
+
   })
 
-  // Premade list page
-  // .state('categories', {
-  //   url: '/main-list',
-  //   templateUrl: 'src/restaurantmenu/templates/main-categories.template.html',
-  //   controller: 'MainShoppingListController as mainList',
-  //   resolve: {
-  //     items: ['ShoppingListService', function (ShoppingListService) {
-  //       return ShoppingListService.getItems();
-  //     }]
-  //   }
-  // })
+//  List categories
+  .state('mainCategories', {
+    url: '/main-categories',
+    templateUrl: 'src/restaurantmenu/templates/main-categories.template.html',
+    controller: 'categoriesController as mainCategories',
+    resolve: {
+      categories: ['MenuDataService', function (MenuDataService) {
+        return MenuDataService.getAllCategories();
+      }]
+    }
+    })
 
-  // Item detail
+  //Item detail
   // .state('categories.item', {
-  //   // url: '/item-detail/{itemId}',
   //   templateUrl: 'src/restaurantmenu/templates/item-detail.template.html',
   //   controller: 'ItemDetailController as itemDetail',
   //   params: {
-  //     itemId: null
+  //     categoryId: null
   //   }
   // });
-
+console.log("Router");
 }
 
 })();
