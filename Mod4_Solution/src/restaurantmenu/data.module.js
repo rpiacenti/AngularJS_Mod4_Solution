@@ -4,7 +4,7 @@
   angular.module('data',[])
   .controller('categoriesController', categoriesController);
   // .controller('ItemDetailController', ItemDetailController);
-//  console.log("data");
+
 
   categoriesController.$inject = ['categories'];
   function categoriesController(categories) {
