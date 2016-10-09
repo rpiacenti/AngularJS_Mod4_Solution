@@ -3,7 +3,7 @@
 
 angular.module('MenuApp')
 .config(RoutesConfig);
-
+console.log("Router");
 RoutesConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 function RoutesConfig($stateProvider, $urlRouterProvider) {
 
@@ -17,14 +17,13 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
   .state('home', {
     url: '/',
     templateUrl: 'src/restaurantmenu/templates/home.template.html'
-
   })
 
 //  List categories
   .state('mainCategories', {
     url: '/main-categories',
     templateUrl: 'src/restaurantmenu/templates/main-categories.template.html',
-    controller: 'categoriesController as mainCategories',
+    controller: 'categoriesController as listCategories',
     resolve: {
       categories: ['MenuDataService', function (MenuDataService) {
         return MenuDataService.getAllCategories();
@@ -33,14 +32,18 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
     })
 
   //Item detail
-  // .state('categories.item', {
-  //   templateUrl: 'src/restaurantmenu/templates/item-detail.template.html',
-  //   controller: 'ItemDetailController as itemDetail',
-  //   params: {
-  //     categoryId: null
-  //   }
-  // });
-console.log("Router");
+  .state('mainCategories.itemDetail', {
+    url: '/item-detail/{catIndex}',
+    templateUrl: 'src/restaurantmenu/templates/item-detail.template.html',
+    controller: 'ItemDetailController as itemDetail',
+    resolve: {
+     items : ['$stateParams','MenuDataService','categories',
+            function ($stateParams,MenuDataService,categories) {
+              return MenuDataService.getItemsForCategory($stateParams.catIndex,categories)
+            }]
+     }
+  });
+
 }
 
 })();

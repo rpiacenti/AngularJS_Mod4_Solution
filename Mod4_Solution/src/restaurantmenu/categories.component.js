@@ -1,12 +1,14 @@
 (function () {
 'use strict';
 //console.log("Passei em Categories");
-angular.module('MenuApp')
+angular.module('data')
 .component('categories', {
-  templateUrl: 'src/restaurantmenu/templates/main-categories.template.html',
+  templateUrl: 'src/restaurantmenu/templates/categories.template.html',
   bindings: {
     categories : '<'
   }
 });
+
+
 
 })();

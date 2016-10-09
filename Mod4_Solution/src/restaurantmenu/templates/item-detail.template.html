@@ -1,3 +1,8 @@
-<div>Item name: {{ itemDetail.name }}</div>
-<div>Item quantity: {{ itemDetail.quantity }}</div>
-<div>Item description: {{ itemDetail.description }}</div>
+<div class="detail-view">
+<h4>Menu Item for Category: {{itemDetail.catogory}} </h4>
+<ul>
+  <li ng-repeat="item in itemDetail.items" >
+    {{item.short_name}} -  {{item.name}} <span >{{item.price_large}}$</span>
+  </li>
+</ul>
+</div>
